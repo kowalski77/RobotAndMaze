@@ -9,7 +9,7 @@ namespace RobotAndMaze
     {
         private static void Main()
         {
-            var gameManager = new GameManager(new MatrixProvider(), new GameDisplay(), new MoveService(), new Robot("Max"));
+            var gameManager = new GameManager(new MatrixProvider(), new GameDisplay(), new MoveService(new Robot("Max")));
             gameManager.Run();
         }
     }

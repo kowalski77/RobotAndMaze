@@ -9,24 +9,24 @@
 
         public string Name { get; }
 
-        public Movement Forward()
+        public Step Forward()
         {
-            return new(Direction.Forward, 1);
+            return Step.CreateInstance(1);
         }
 
-        public Movement Back()
+        public Step Back()
         {
-            return new(Direction.Back, 1);
+            return Step.CreateInstance(1);
         }
 
-        public Movement Left()
+        public Step Left()
         {
-            return new(Direction.Left, 1);
+            return Step.CreateInstance(1);
         }
 
-        public Movement Right()
+        public Step Right()
         {
-            return new(Direction.Right, 1);
+            return Step.CreateInstance(1);
         }
     }
 }

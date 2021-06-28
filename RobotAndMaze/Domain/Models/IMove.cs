@@ -2,8 +2,12 @@
 {
     public interface IMove
     {
-        Movement Forward();
+        Step Forward();
         
-        Movement Back();
+        Step Back();
+
+        Step Left();
+
+        Step Right();
     }
 }

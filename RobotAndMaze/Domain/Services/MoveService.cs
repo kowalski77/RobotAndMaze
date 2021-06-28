@@ -6,16 +6,23 @@ namespace RobotAndMaze.Domain.Services
 {
     public class MoveService : IMoveService
     {
-        public Result<Matrix> Move(Matrix matrix, Movement movement)
+        private readonly IRobot robot;
+
+        public MoveService(IRobot robot)
+        {
+            this.robot = robot;
+        }
+
+        public Result<Matrix> Move(Matrix matrix, Direction direction)
         {
             var coordinates = matrix.GetCurrentCoordinates();
 
-            var result = movement.Direction switch
+            var result = direction switch
             {
-                Direction.Forward => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos + movement.Steps),
-                Direction.Back => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos - movement.Steps),
-                Direction.Left => matrix.CheckCoordinates(coordinates.XPos - 1, coordinates.YPos),
-                Direction.Right => matrix.CheckCoordinates(coordinates.XPos + 1, coordinates.YPos),
+                Direction.Forward => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos + this.robot.Forward().Value),
+                Direction.Back => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos - this.robot.Back().Value),
+                Direction.Left => matrix.CheckCoordinates(coordinates.XPos - this.robot.Left().Value, coordinates.YPos),
+                Direction.Right => matrix.CheckCoordinates(coordinates.XPos + this.robot.Right().Value, coordinates.YPos),
                 _ => throw new ArgumentOutOfRangeException()
             };
 

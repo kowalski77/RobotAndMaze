@@ -11,18 +11,15 @@ namespace RobotAndMaze.Application
         private readonly IGameDisplay gameDisplay;
         private readonly IMatrixProvider matrixProvider;
         private readonly IMoveService moveService;
-        private readonly IRobot robot;
 
         public GameManager(
             IMatrixProvider matrixProvider,
             IGameDisplay gameDisplay, 
-            IMoveService moveService, 
-            IRobot robot)
+            IMoveService moveService)
         {
             this.matrixProvider = matrixProvider;
             this.moveService = moveService;
             this.gameDisplay = gameDisplay;
-            this.robot = robot;
         }
 
         public void Run()
@@ -44,16 +41,16 @@ namespace RobotAndMaze.Application
                         this.gameDisplay.PrintEnd();
                         return;
                     case "w":
-                        result = this.moveService.Move(matrix, this.robot.Forward());
+                        result = this.moveService.Move(matrix, Direction.Forward);
                         break;
                     case "s":
-                        result = this.moveService.Move(matrix, this.robot.Back());
+                        result = this.moveService.Move(matrix, Direction.Back);
                         break;
                     case "a":
-                        result = this.moveService.Move(matrix, this.robot.Left());
+                        result = this.moveService.Move(matrix, Direction.Left);
                         break;
                     case "d":
-                        result = this.moveService.Move(matrix, this.robot.Right());
+                        result = this.moveService.Move(matrix, Direction.Right);
                         break;
                     default:
                         this.gameDisplay.PrintUnknownOption();

@@ -5,7 +5,7 @@ namespace RobotAndMaze.Domain.Services
 {
     public interface IMoveService
     {
-        Result<Matrix> Move(Matrix matrix, Movement movement);
+        Result<Matrix> Move(Matrix matrix, Direction direction);
 
         bool CheckFinish(Matrix matrix);
     }
