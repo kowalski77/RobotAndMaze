@@ -23,5 +23,12 @@ namespace RobotAndMaze.Domain.Services
                 Result.Ok(matrix.SetCurrentCell(coordinates, result.Value)) : 
                 Result.Fail<Matrix>($"Could not make a movement due to: {result.Error}");
         }
+
+        public bool CheckFinish(Matrix matrix)
+        {
+            var coordinates = matrix.GetCurrentCoordinates();
+
+            return matrix.CheckFinish(coordinates);
+        }
     }
 }

@@ -36,9 +36,9 @@ namespace RobotAndMaze.Domain.Models
         {
             try
             {
-                var coordinates = this.Cells[xPos, yPos];
+                var cell = this.Cells[xPos, yPos];
 
-                return coordinates.Blocked
+                return cell.Blocked
                     ? Result.Fail<Coordinates>($"Coordinates x:{xPos}, y:{yPos} is blocked")
                     : Result.Ok(new Coordinates
                     {
@@ -50,6 +50,11 @@ namespace RobotAndMaze.Domain.Models
             {
                 return Result.Fail<Coordinates>($"Coordinates x:{xPos}, y:{yPos} out of the matrix limits");
             }
+        }
+
+        public bool CheckFinish(Coordinates coordinates)
+        {
+            return this.Cells[coordinates.XPos, coordinates.YPos].Exit;
         }
 
         public Matrix SetCurrentCell(Coordinates oldCoordinates, Coordinates newCoordinates)

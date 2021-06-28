@@ -6,31 +6,35 @@ namespace RobotAndMaze.Infrastructure
 {
     public class GameDisplay : IGameDisplay
     {
-        public void PrintMatrix(Result<Matrix> result)
+        public void PrintMatrix(Matrix matrix)
         {
             Console.WriteLine("===============");
 
+            var rowLength = matrix.Cells.GetLength(0);
+            var colLength = matrix.Cells.GetLength(1);
+
+            for (var j = colLength -1 ; j >= 0; j--)
+            {
+                for (var i = 0; i < rowLength; i++)
+                {
+                    var icon = GetIcon(matrix.Cells[i, j]);
+                    Console.Write(icon);
+                }
+                Console.Write(Environment.NewLine);
+            }
+
+            Console.WriteLine("===============");
+        }
+
+        public void PrintMatrix(Result<Matrix> result)
+        {
             if (!result.Success)
             {
                 Console.WriteLine(result.Error);
                 return;
             }
 
-            var rowLength = result.Value.Cells.GetLength(0);
-            var colLength = result.Value.Cells.GetLength(1);
-
-            for (var i = 0; i < rowLength; i++)
-            {
-                for (var j = 0; j < colLength; j++)
-                {
-                    var icon = GetIcon(result.Value.Cells[i, j]);
-                    Console.Write(icon);
-                }
-
-                Console.Write(Environment.NewLine);
-            }
-
-            Console.WriteLine("===============");
+            this.PrintMatrix(result.Value);
         }
 
         public void PrintStart()

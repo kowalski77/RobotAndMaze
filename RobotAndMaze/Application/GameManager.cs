@@ -30,6 +30,7 @@ namespace RobotAndMaze.Application
             this.gameDisplay.PrintStart();
 
             var matrix = this.matrixProvider.GetBasic();
+            this.gameDisplay.PrintMatrix(matrix);
 
             while (true)
             {
@@ -60,6 +61,14 @@ namespace RobotAndMaze.Application
                 }
 
                 this.gameDisplay.PrintMatrix(result);
+
+                if (!this.moveService.CheckFinish(matrix))
+                {
+                    continue;
+                }
+
+                this.gameDisplay.PrintEnd();
+                return;
             }
         }
     }
