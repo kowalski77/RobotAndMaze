@@ -4,7 +4,7 @@ using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Domain.Services
 {
-    public class GameService : IGameService
+    public class MoveService : IMoveService
     {
         public Result<Matrix> Move(Matrix matrix, Movement movement)
         {

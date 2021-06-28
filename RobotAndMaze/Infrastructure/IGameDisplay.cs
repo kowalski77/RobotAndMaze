@@ -5,6 +5,14 @@ namespace RobotAndMaze.Infrastructure
 {
     public interface IGameDisplay
     {
-        void Print(Result<Matrix> result);
+        void PrintMatrix(Result<Matrix> result);
+
+        void PrintStart();
+
+        void PrintEnd();
+
+        void PrintOptions();
+
+        void PrintUnknownOption();
     }
 }
