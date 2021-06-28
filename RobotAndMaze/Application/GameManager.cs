@@ -29,12 +29,12 @@ namespace RobotAndMaze.Application
             var matrix = this.matrixProvider.GetBasic();
             this.gameDisplay.PrintMatrix(matrix);
 
+            var result = new Result<Matrix>(matrix, true, string.Empty);
             while (true)
             {
                 this.gameDisplay.PrintOptions();
 
                 var option = Console.ReadLine();
-                var result = new Result<Matrix>(matrix, true, string.Empty);
                 switch (option)
                 {
                     case "x":

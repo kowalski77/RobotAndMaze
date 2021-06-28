@@ -6,7 +6,8 @@
         {
             this.Value = value;
         }
-        public int Value { get; set; }
+
+        public int Value { get; }
 
         public static Step CreateInstance(int value)
         {
