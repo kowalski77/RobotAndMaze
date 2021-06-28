@@ -19,10 +19,10 @@ namespace RobotAndMaze.Domain.Services
 
             var result = direction switch
             {
-                Direction.Forward => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos + this.robot.Forward().Value),
-                Direction.Back => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos - this.robot.Back().Value),
-                Direction.Left => matrix.CheckCoordinates(coordinates.XPos - this.robot.Left().Value, coordinates.YPos),
-                Direction.Right => matrix.CheckCoordinates(coordinates.XPos + this.robot.Right().Value, coordinates.YPos),
+                Direction.Forward => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos + this.robot.Forward.Value),
+                Direction.Back => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos - this.robot.Back.Value),
+                Direction.Left => matrix.CheckCoordinates(coordinates.XPos - this.robot.Left.Value, coordinates.YPos),
+                Direction.Right => matrix.CheckCoordinates(coordinates.XPos + this.robot.Right.Value, coordinates.YPos),
                 _ => throw new ArgumentOutOfRangeException()
             };
 

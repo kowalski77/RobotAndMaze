@@ -9,24 +9,12 @@
 
         public string Name { get; }
 
-        public Step Forward()
-        {
-            return Step.CreateInstance(1);
-        }
+        public Step Forward => Step.CreateInstance(1);
 
-        public Step Back()
-        {
-            return Step.CreateInstance(1);
-        }
+        public Step Back  => Step.CreateInstance(1);
 
-        public Step Left()
-        {
-            return Step.CreateInstance(1);
-        }
+        public Step Left  => Step.CreateInstance(1);
 
-        public Step Right()
-        {
-            return Step.CreateInstance(1);
-        }
+        public Step Right  => Step.CreateInstance(1);
     }
 }
