@@ -1,42 +1,27 @@
 ﻿using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Domain.Services;
+using RobotAndMaze.Infrastructure;
+using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Application
 {
     public class GameManager
     {
+        private readonly IGameDisplay gameDisplay;
         private readonly IGameService gameService;
-        private readonly IRobot machine;
 
-        public GameManager(IGameService gameService, IRobot machine)
+        public GameManager(IGameDisplay gameDisplay, IGameService gameService)
         {
             this.gameService = gameService;
-            this.machine = machine;
+            this.gameDisplay = gameDisplay;
         }
 
         public void Run()
         {
-            var matrix = new Matrix(FillCoordinatesArray());
+            var matrix = new Matrix(MatrixSeed.Create3X3Cells());
 
-            var result = this.gameService.Move(matrix, this.machine.Right());
+            //var result = this.gameService.Move(matrix, this.machine.Left());
         }
 
-        private static Cell[,] FillCoordinatesArray()
-        {
-            var coordinates = new Cell[3, 3];
-            for (var i = 0; i < coordinates.GetLength(0); i++)
-            {
-                for (var j = 0; j < coordinates.GetLength(1); j++)
-                {
-                    coordinates[i, j] = new Cell(false, false);
-                }
-            }
-
-            coordinates[0, 0].Current = true;
-            coordinates[1, 1].Blocked = true;
-            coordinates[2, 2].Exit = true;
-
-            return coordinates;
-        }
     }
 }

@@ -46,7 +46,7 @@ namespace RobotAndMaze.Domain.Models
                         YPos = yPos
                     });
             }
-            catch (ArgumentOutOfRangeException)
+            catch (IndexOutOfRangeException)
             {
                 return Result.Fail<Coordinates>($"Coordinates x:{xPos}, y:{yPos} out of the matrix limits");
             }

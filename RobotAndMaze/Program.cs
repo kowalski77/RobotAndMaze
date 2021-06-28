@@ -1,6 +1,6 @@
 ﻿using RobotAndMaze.Application;
-using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Domain.Services;
+using RobotAndMaze.Infrastructure;
 
 namespace RobotAndMaze
 {
@@ -8,7 +8,7 @@ namespace RobotAndMaze
     {
         private static void Main()
         {
-            var gameManager = new GameManager(new GameService(), new Robot("Max"));
+            var gameManager = new GameManager(new GameDisplay(), new GameService());
             gameManager.Run();
         }
     }
