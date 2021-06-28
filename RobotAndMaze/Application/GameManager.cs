@@ -16,25 +16,25 @@ namespace RobotAndMaze.Application
 
         public void Run()
         {
-            var matrix = new Matrix(this.FillCoordinatesArray());
+            var matrix = new Matrix(FillCoordinatesArray());
 
             var result = this.gameService.Move(matrix, this.machine.Right());
         }
 
-
-        private Coordinates[,] FillCoordinatesArray()
+        private static Cell[,] FillCoordinatesArray()
         {
-            var coordinates = new Coordinates[3, 3];
+            var coordinates = new Cell[3, 3];
             for (var i = 0; i < coordinates.GetLength(0); i++)
             {
                 for (var j = 0; j < coordinates.GetLength(1); j++)
                 {
-                    coordinates[i, j] = new Coordinates(i, j, false, false);
+                    coordinates[i, j] = new Cell(false, false);
                 }
             }
 
             coordinates[0, 0].Current = true;
             coordinates[1, 1].Blocked = true;
+            coordinates[2, 2].Exit = true;
 
             return coordinates;
         }

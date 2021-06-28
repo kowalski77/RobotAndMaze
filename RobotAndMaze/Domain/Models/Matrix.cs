@@ -5,22 +5,26 @@ namespace RobotAndMaze.Domain.Models
 {
     public class Matrix
     {
-        public Matrix(Coordinates[,] coordinates)
+        public Matrix(Cell[,] cells)
         {
-            this.Coordinates = coordinates;
+            this.Cells = cells;
         }
 
-        public Coordinates[,] Coordinates { get; }
+        public Cell[,] Cells { get; }
 
         public Coordinates GetCurrentCoordinates()
         {
-            for (var i = 0; i < this.Coordinates.GetLength(0); i++)
+            for (var i = 0; i < this.Cells.GetLength(0); i++)
             {
-                for (var j = 0; j < this.Coordinates.GetLength(1); j++)
+                for (var j = 0; j < this.Cells.GetLength(1); j++)
                 {
-                    if (this.Coordinates[i, j].Current)
+                    if (this.Cells[i, j].Current)
                     {
-                        return this.Coordinates[i, j];    
+                        return new Coordinates
+                        {
+                            XPos = i,
+                            YPos = j
+                        };
                     }
                 }
             }
@@ -28,20 +32,27 @@ namespace RobotAndMaze.Domain.Models
             throw new IndexOutOfRangeException();
         }
 
-        public void SetCurrentCoordinates(Coordinates coordinates)
+        public Matrix SetCurrentCell(Coordinates oldCoordinates, Coordinates newCoordinates)
         {
-            this.Coordinates[coordinates.XPosition, coordinates.YPosition].SetCurrent();
+            this.Cells[oldCoordinates.XPos, oldCoordinates.YPos].RemoveCurrent();
+            this.Cells[newCoordinates.XPos, newCoordinates.YPos].SetCurrent();
+
+            return new Matrix(this.Cells);
         }
 
         public Result<Coordinates> CheckCoordinates(int xPos, int yPos)
         {
             try
             {
-                var coordinates = this.Coordinates[xPos, yPos];
+                var coordinates = this.Cells[xPos, yPos];
 
                 return coordinates.Blocked
                     ? Result.Fail<Coordinates>($"Coordinates x:{xPos}, y:{yPos} is blocked")
-                    : Result.Ok(coordinates);
+                    : Result.Ok(new Coordinates
+                    {
+                        XPos = xPos,
+                        YPos = yPos
+                    });
             }
             catch (ArgumentOutOfRangeException)
             {
