@@ -6,7 +6,7 @@ namespace RobotAndMaze.Domain.Services
 {
     public class GameService : IGameService
     {
-        public Result Move(Matrix matrix, Movement movement)
+        public Result<Matrix> Move(Matrix matrix, Movement movement)
         {
             var coordinates = matrix.GetCurrentCoordinates();
 
@@ -19,12 +19,9 @@ namespace RobotAndMaze.Domain.Services
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            if (result.Success)
-            {
-                matrix.SetCurrentCell(coordinates, result.Value);
-            }
-
-            return result;
+            return result.Success ? 
+                Result.Ok(matrix.SetCurrentCell(coordinates, result.Value)) : 
+                Result.Fail<Matrix>($"Could not make a movement due to: {result.Error}");
         }
     }
 }

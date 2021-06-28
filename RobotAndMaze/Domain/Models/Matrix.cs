@@ -32,14 +32,6 @@ namespace RobotAndMaze.Domain.Models
             throw new IndexOutOfRangeException();
         }
 
-        public Matrix SetCurrentCell(Coordinates oldCoordinates, Coordinates newCoordinates)
-        {
-            this.Cells[oldCoordinates.XPos, oldCoordinates.YPos].RemoveCurrent();
-            this.Cells[newCoordinates.XPos, newCoordinates.YPos].SetCurrent();
-
-            return new Matrix(this.Cells);
-        }
-
         public Result<Coordinates> CheckCoordinates(int xPos, int yPos)
         {
             try
@@ -58,6 +50,14 @@ namespace RobotAndMaze.Domain.Models
             {
                 return Result.Fail<Coordinates>($"Coordinates x:{xPos}, y:{yPos} out of the matrix limits");
             }
+        }
+
+        public Matrix SetCurrentCell(Coordinates oldCoordinates, Coordinates newCoordinates)
+        {
+            this.Cells[oldCoordinates.XPos, oldCoordinates.YPos].RemoveCurrent();
+            this.Cells[newCoordinates.XPos, newCoordinates.YPos].SetCurrent();
+
+            return new Matrix(this.Cells);
         }
     }
 }
