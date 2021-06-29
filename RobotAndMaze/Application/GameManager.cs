@@ -2,7 +2,6 @@
 using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Domain.Services;
 using RobotAndMaze.Infrastructure;
-using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Application
 {
@@ -28,36 +27,35 @@ namespace RobotAndMaze.Application
 
             var matrix = this.matrixProvider.GetBasic();
             this.gameDisplay.PrintMatrix(matrix);
-
-            var result = new Result<Matrix>(matrix, true, string.Empty);
+            
             while (true)
             {
                 this.gameDisplay.PrintOptions();
 
-                var option = Console.ReadLine();
-                switch (option)
+                var key = Console.ReadKey().Key;
+                switch (key)
                 {
-                    case "x":
+                    case ConsoleKey.X:
                         this.gameDisplay.PrintEnd();
                         return;
-                    case "w":
-                        result = this.moveService.Move(matrix, Direction.Forward);
+                    case ConsoleKey.W:
+                        matrix = this.MakeMovement(matrix, Direction.Forward);
                         break;
-                    case "s":
-                        result = this.moveService.Move(matrix, Direction.Back);
+                    case ConsoleKey.S:
+                        matrix = this.MakeMovement(matrix, Direction.Back);
                         break;
-                    case "a":
-                        result = this.moveService.Move(matrix, Direction.Left);
+                    case ConsoleKey.A:
+                        matrix = this.MakeMovement(matrix, Direction.Left);
                         break;
-                    case "d":
-                        result = this.moveService.Move(matrix, Direction.Right);
+                    case ConsoleKey.D:
+                        matrix = this.MakeMovement(matrix, Direction.Right);
                         break;
                     default:
                         this.gameDisplay.PrintUnknownOption();
                         break;
                 }
 
-                this.gameDisplay.PrintMatrix(result);
+                this.gameDisplay.PrintMatrix(matrix);
 
                 if (!this.moveService.CheckFinish(matrix))
                 {
@@ -67,6 +65,19 @@ namespace RobotAndMaze.Application
                 this.gameDisplay.PrintEnd();
                 return;
             }
+        }
+
+        private Matrix MakeMovement(Matrix matrix, Direction direction)
+        {
+            var result = this.moveService.CanMove(matrix, direction);
+            if (result.Success)
+            {
+                matrix = this.moveService.Move(matrix, direction);
+            }
+
+            this.gameDisplay.PrintResult(result);
+
+            return matrix;
         }
     }
 }

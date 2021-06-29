@@ -11,13 +11,13 @@ namespace RobotAndMaze.Support
             {
                 for (var j = 0; j < coordinates.GetLength(1); j++)
                 {
-                    coordinates[i, j] = new Cell(false, false);
+                    coordinates[i, j] = new Cell(false, false, false);
                 }
             }
 
-            coordinates[0, 0].Current = true;
-            coordinates[1, 1].Blocked = true;
-            coordinates[2, 2].Exit = true;
+            coordinates[0, 0].SetCurrent(true);
+            coordinates[1, 1].SetBlocked();
+            coordinates[2, 2].SetLast();
 
             return coordinates;
         }

@@ -7,7 +7,10 @@ namespace RobotAndMaze.Infrastructure
     {
         public Matrix GetBasic()
         {
-            return new(MatrixSeed.Create3X3Cells());
+            return new(MatrixSeed.Create3X3Cells(), new Coordinates
+            {
+                XPos = 0, YPos = 0
+            });
         }
     }
 }

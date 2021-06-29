@@ -2,26 +2,36 @@
 {
     public class Cell
     {
-        public Cell(bool blocked, bool current)
+        public Cell(bool current, bool blocked, bool last)
         {
-            this.Blocked = blocked;
             this.Current = current;
+            this.Blocked = blocked;
+            this.Last = last;
         }
 
-        public bool Blocked { get; internal set; }
+        public bool Current { get; private set; }
 
-        public bool Current { get; internal set; }
+        public bool Blocked { get; private set; }
 
-        public bool Exit { get; internal set; }
+        public bool Last { get; private set; }
 
-        public void SetCurrent()
+        public void SetCurrent(bool value)
         {
-            this.Current = true;
+            this.Current = value;
+            this.Blocked = false;
         }
 
-        public void RemoveCurrent()
+        public void SetBlocked()
         {
             this.Current = false;
+            this.Blocked = true;
+        }
+
+        public void SetLast()
+        {
+            this.Current = false;
+            this.Blocked = false;
+            this.Last = true;
         }
     }
 }

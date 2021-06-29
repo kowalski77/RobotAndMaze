@@ -6,6 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Support\MatrixSeed.cs~RFbce5ba.TMP" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Folder Include="Application" />
     </ItemGroup>
 

@@ -26,15 +26,17 @@ namespace RobotAndMaze.Infrastructure
             Console.WriteLine("===============");
         }
 
-        public void PrintMatrix(Result<Matrix> result)
+        public void PrintResult(Result result)
         {
+            Console.WriteLine();
+
             if (!result.Success)
             {
                 Console.WriteLine(result.Error);
                 return;
             }
 
-            this.PrintMatrix(result.Value);
+            Console.WriteLine("Success!");
         }
 
         public void PrintStart()
@@ -56,7 +58,7 @@ namespace RobotAndMaze.Infrastructure
             Console.WriteLine("[s] - Move back");
             Console.WriteLine("[a] - Move left");
             Console.WriteLine("[d] - Move right");
-            Console.WriteLine("[x] - Exit");
+            Console.WriteLine("[x] - Last");
         }
 
         public void PrintUnknownOption()
@@ -69,7 +71,7 @@ namespace RobotAndMaze.Infrastructure
             return cell switch
             {
                 { Current: true } => "C",
-                { Exit: true } => "E",
+                { Last: true } => "E",
                 { Blocked: true } => "X",
                 _ => "_"
             };

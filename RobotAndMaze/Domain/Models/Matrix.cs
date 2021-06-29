@@ -5,32 +5,15 @@ namespace RobotAndMaze.Domain.Models
 {
     public class Matrix
     {
-        public Matrix(Cell[,] cells)
+        public Matrix(Cell[,] cells, Coordinates currentCoordinates)
         {
             this.Cells = cells;
+            this.CurrentCoordinates = currentCoordinates;
         }
 
         public Cell[,] Cells { get; }
 
-        public Coordinates GetCurrentCoordinates()
-        {
-            for (var i = 0; i < this.Cells.GetLength(0); i++)
-            {
-                for (var j = 0; j < this.Cells.GetLength(1); j++)
-                {
-                    if (this.Cells[i, j].Current)
-                    {
-                        return new Coordinates
-                        {
-                            XPos = i,
-                            YPos = j
-                        };
-                    }
-                }
-            }
-            
-            throw new IndexOutOfRangeException();
-        }
+        public Coordinates CurrentCoordinates { get; }
 
         public Result<Coordinates> CheckCoordinates(int xPos, int yPos)
         {
@@ -54,15 +37,15 @@ namespace RobotAndMaze.Domain.Models
 
         public bool CheckFinish(Coordinates coordinates)
         {
-            return this.Cells[coordinates.XPos, coordinates.YPos].Exit;
+            return this.Cells[coordinates.XPos, coordinates.YPos].Last;
         }
 
-        public Matrix SetCurrentCell(Coordinates oldCoordinates, Coordinates newCoordinates)
+        public Matrix WithUpdatedCurrentCell(Coordinates newCoordinates)
         {
-            this.Cells[oldCoordinates.XPos, oldCoordinates.YPos].RemoveCurrent();
-            this.Cells[newCoordinates.XPos, newCoordinates.YPos].SetCurrent();
+            this.Cells[this.CurrentCoordinates.XPos, this.CurrentCoordinates.YPos].SetCurrent(false);
+            this.Cells[newCoordinates.XPos, newCoordinates.YPos].SetCurrent(true);
 
-            return new Matrix(this.Cells);
+            return new(this.Cells, newCoordinates);
         }
     }
 }

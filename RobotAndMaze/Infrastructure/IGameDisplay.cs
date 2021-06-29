@@ -7,7 +7,7 @@ namespace RobotAndMaze.Infrastructure
     {
         void PrintMatrix(Matrix matrix);
 
-        void PrintMatrix(Result<Matrix> result);
+        void PrintResult(Result result);
 
         void PrintStart();
 

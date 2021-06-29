@@ -10,12 +10,12 @@ namespace RobotAndMaze.Domain.Services
 
         public MoveService(IRobot robot)
         {
-            this.robot = robot;
+            this.robot = robot ?? throw new ArgumentNullException(nameof(robot));
         }
-
-        public Result<Matrix> Move(Matrix matrix, Direction direction)
+        
+        public Result<Coordinates> CanMove(Matrix matrix, Direction direction)
         {
-            var coordinates = matrix.GetCurrentCoordinates();
+            var coordinates = matrix.CurrentCoordinates;
 
             var result = direction switch
             {
@@ -25,17 +25,28 @@ namespace RobotAndMaze.Domain.Services
                 Direction.Right => matrix.CheckCoordinates(coordinates.XPos + this.robot.Right.Value, coordinates.YPos),
                 _ => throw new ArgumentOutOfRangeException($"{nameof(direction)} not available.")
             };
-
+            
             return result.Success ? 
-                Result.Ok(matrix.SetCurrentCell(coordinates, result.Value)) : 
-                Result.Fail<Matrix>($"Could not make a movement due to: {result.Error}");
+                Result.Ok(result.Value) : 
+                Result.Fail<Coordinates>($"Could not make a movement due to: {result.Error}");
+        } 
+
+        public Matrix Move(Matrix matrix, Direction direction)
+        {
+            var result = this.CanMove(matrix, direction);
+            if (!result.Success)
+            {
+                throw new InvalidOperationException($"Can not move due to: {result.Error}");
+            }
+            
+            var newlyMatrix = matrix.WithUpdatedCurrentCell(result.Value);
+
+            return newlyMatrix;
         }
 
         public bool CheckFinish(Matrix matrix)
         {
-            var coordinates = matrix.GetCurrentCoordinates();
-
-            return matrix.CheckFinish(coordinates);
+            return matrix.CheckFinish(matrix.CurrentCoordinates);
         }
     }
 }
