@@ -3,7 +3,8 @@
     public enum MachineType
     {
         Unknown,
-        Rover,
+        BasicRover,
+        AdvancedRover,
         Helicopter
     }
 }

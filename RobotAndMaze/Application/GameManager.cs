@@ -69,10 +69,10 @@ namespace RobotAndMaze.Application
 
         private Matrix MakeMovement(Matrix matrix, Direction direction)
         {
-            var result = this.moveService.CanMove(matrix, direction, MachineType.Rover);
+            var result = this.moveService.CanMove(matrix, direction, MachineType.BasicRover);
             if (result.Success)
             {
-                matrix = this.moveService.Move(matrix, direction, MachineType.Rover);
+                matrix = this.moveService.Move(matrix, direction, MachineType.BasicRover);
             }
 
             this.gameDisplay.PrintResult(result);

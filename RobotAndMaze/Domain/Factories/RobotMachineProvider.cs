@@ -6,9 +6,9 @@ namespace RobotAndMaze.Domain.Factories
 {
     public class RobotMachineProvider : MachineProvider
     {
-        private readonly IRobot robot;
+        private readonly IRover robot;
 
-        public RobotMachineProvider(IRobot robot)
+        public RobotMachineProvider(IRover robot)
         {
             this.robot = robot ?? throw new ArgumentNullException(nameof(robot));
         }
@@ -23,7 +23,7 @@ namespace RobotAndMaze.Domain.Factories
                 Direction.Back => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos - this.robot.Back.Value),
                 Direction.Left => matrix.CheckCoordinates(coordinates.XPos - this.robot.Left.Value, coordinates.YPos),
                 Direction.Right => matrix.CheckCoordinates(coordinates.XPos + this.robot.Right.Value, coordinates.YPos),
-                _ => Result.Fail<Coordinates>($"Direction {nameof(direction)} not available for type: {nameof(IRobot)}")
+                _ => Result.Fail<Coordinates>($"Direction {nameof(direction)} not available for type: {nameof(IRover)}")
             };
 
             return result.Success
