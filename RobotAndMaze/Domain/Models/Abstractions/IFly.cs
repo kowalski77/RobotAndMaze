@@ -2,12 +2,12 @@
 {
     public interface IFly
     {
-        Step UpRight { get; }
+        int UpRight { get; }
 
-        Step UpLeft { get; }
+        int UpLeft { get; }
 
-        Step DownRight { get; }
+        int DownRight { get; }
 
-        Step DownLeft { get; }
+        int DownLeft { get; }
     }
 }

@@ -20,14 +20,14 @@ namespace RobotAndMaze.Domain.Factories
 
             var result = direction switch
             {
-                Direction.Forward => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos + this.helicopter.Forward.Value),
-                Direction.Back => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos - this.helicopter.Back.Value),
-                Direction.Left => matrix.CheckCoordinates(coordinates.XPos - this.helicopter.Left.Value, coordinates.YPos),
-                Direction.Right => matrix.CheckCoordinates(coordinates.XPos + this.helicopter.Right.Value, coordinates.YPos),
-                Direction.UpRight => matrix.CheckCoordinates(coordinates.XPos + this.helicopter.UpRight.Value, coordinates.YPos + this.helicopter.UpRight.Value),
-                Direction.UpLeft => matrix.CheckCoordinates(coordinates.XPos - this.helicopter.UpLeft.Value, coordinates.YPos + this.helicopter.UpLeft.Value),
-                Direction.DownRight => matrix.CheckCoordinates(coordinates.XPos + this.helicopter.DownRight.Value, coordinates.YPos - this.helicopter.DownRight.Value),
-                Direction.DownLeft => matrix.CheckCoordinates(coordinates.XPos - this.helicopter.DownLeft.Value, coordinates.YPos - this.helicopter.DownLeft.Value),
+                Direction.Forward => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos + this.helicopter.Forward),
+                Direction.Back => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos - this.helicopter.Back),
+                Direction.Left => matrix.CheckCoordinates(coordinates.XPos - this.helicopter.Left, coordinates.YPos),
+                Direction.Right => matrix.CheckCoordinates(coordinates.XPos + this.helicopter.Right, coordinates.YPos),
+                Direction.UpRight => matrix.CheckCoordinates(coordinates.XPos + this.helicopter.UpRight, coordinates.YPos + this.helicopter.UpRight),
+                Direction.UpLeft => matrix.CheckCoordinates(coordinates.XPos - this.helicopter.UpLeft, coordinates.YPos + this.helicopter.UpLeft),
+                Direction.DownRight => matrix.CheckCoordinates(coordinates.XPos + this.helicopter.DownRight, coordinates.YPos - this.helicopter.DownRight),
+                Direction.DownLeft => matrix.CheckCoordinates(coordinates.XPos - this.helicopter.DownLeft, coordinates.YPos - this.helicopter.DownLeft),
                 _ => Result.Fail<Coordinates>($"Direction {nameof(direction)} not available for type: {nameof(IHelicopter)}")
             };
 

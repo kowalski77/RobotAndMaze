@@ -13,12 +13,12 @@ namespace RobotAndMaze.Domain.Models
 
         public RobotType RobotType => RobotType.AdvancedRover;
 
-        public Step Forward => Step.CreateInstance(2);
+        public int Forward => 2;
 
-        public Step Back  => Step.CreateInstance(2);
+        public int Back => 2;
 
-        public Step Left  => Step.CreateInstance(1);
+        public int Left => 1;
 
-        public Step Right  => Step.CreateInstance(1);
+        public int Right => 1;
     }
 }

@@ -13,20 +13,20 @@ namespace RobotAndMaze.Domain.Models
 
         public RobotType RobotType => RobotType.BasicHelicopter;
 
-        public Step UpRight  => Step.CreateInstance(1);
+        public int UpRight => 1;
 
-        public Step UpLeft  => Step.CreateInstance(1);
+        public int UpLeft => 1;
 
-        public Step DownRight  => Step.CreateInstance(1);
+        public int DownRight => 1;
 
-        public Step DownLeft  => Step.CreateInstance(1);
+        public int DownLeft => 1;
 
-        public Step Forward => Step.CreateInstance(1);
+        public int Forward => 1;
 
-        public Step Back => Step.CreateInstance(1);
+        public int Back => 1;
 
-        public Step Left => Step.CreateInstance(1);
+        public int Left => 1;
 
-        public Step Right => Step.CreateInstance(1);
+        public int Right => 1;
     }
 }

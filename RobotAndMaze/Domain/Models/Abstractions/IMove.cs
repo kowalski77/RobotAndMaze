@@ -2,12 +2,12 @@
 {
     public interface IMove
     {
-        Step Forward { get; }
+        int Forward { get; }
         
-        Step Back { get; }
+        int Back { get; }
 
-        Step Left { get; }
+        int Left { get; }
 
-        Step Right { get; }
+        int Right { get; }
     }
 }
