@@ -1,11 +1,17 @@
-﻿using RobotAndMaze.Domain.Models;
+﻿using System;
+using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Domain.Factories
 {
     public class RobotMachineProvider : MachineProvider
     {
-        private readonly IRobot robot = new BasicRobot("Max");
+        private readonly IRobot robot;
+
+        public RobotMachineProvider(IRobot robot)
+        {
+            this.robot = robot ?? throw new ArgumentNullException(nameof(robot));
+        }
 
         public override Result<Coordinates> CheckCoordinates(Matrix matrix, Direction direction)
         {

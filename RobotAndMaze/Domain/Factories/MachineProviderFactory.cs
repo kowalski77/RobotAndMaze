@@ -9,7 +9,7 @@ namespace RobotAndMaze.Domain.Factories
         {
             return machineType switch
             {
-                MachineType.Rover => new RobotMachineProvider(),
+                MachineType.Rover => new RobotMachineProvider(new BasicRobot("Max")),
                 MachineType.Helicopter => new HelicopterMachineProvider(),
                 MachineType.Unknown =>  throw new InvalidOperationException($"{nameof(MachineType.Unknown)} is not a valid type"),
                 _ => throw new ArgumentOutOfRangeException(nameof(machineType), machineType, null)
