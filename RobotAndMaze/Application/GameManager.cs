@@ -33,27 +33,12 @@ namespace RobotAndMaze.Application
                 this.gameDisplay.PrintOptions();
 
                 var key = Console.ReadKey().Key;
-                switch (key)
+                if (key == ConsoleKey.X)
                 {
-                    case ConsoleKey.X:
-                        this.gameDisplay.PrintEnd();
-                        return;
-                    case ConsoleKey.W:
-                        matrix = this.MakeMovement(matrix, Direction.Forward, robotType);
-                        break;
-                    case ConsoleKey.S:
-                        matrix = this.MakeMovement(matrix, Direction.Back, robotType);
-                        break;
-                    case ConsoleKey.A:
-                        matrix = this.MakeMovement(matrix, Direction.Left, robotType);
-                        break;
-                    case ConsoleKey.D:
-                        matrix = this.MakeMovement(matrix, Direction.Right, robotType);
-                        break;
-                    default:
-                        this.gameDisplay.PrintUnknownOption();
-                        break;
+                    return;
                 }
+
+                matrix = this.MakeMovement(key, robotType, matrix);
 
                 this.gameDisplay.PrintMatrix(matrix);
 
@@ -67,7 +52,31 @@ namespace RobotAndMaze.Application
             }
         }
 
-        private Matrix MakeMovement(Matrix matrix, Direction direction, IRobotType robotType)
+        private Matrix MakeMovement(ConsoleKey key, IRobotType robotType, Matrix matrix)
+        {
+            switch (key)
+            {
+                case ConsoleKey.W:
+                    matrix = this.MakeMovement(robotType, matrix, Direction.Forward);
+                    break;
+                case ConsoleKey.S:
+                    matrix = this.MakeMovement(robotType, matrix, Direction.Back);
+                    break;
+                case ConsoleKey.A:
+                    matrix = this.MakeMovement(robotType, matrix, Direction.Left);
+                    break;
+                case ConsoleKey.D:
+                    matrix = this.MakeMovement(robotType, matrix, Direction.Right);
+                    break;
+                default:
+                    this.gameDisplay.PrintUnknownOption();
+                    break;
+            }
+
+            return matrix;
+        }
+
+        private Matrix MakeMovement(IRobotType robotType, Matrix matrix, Direction direction)
         {
             var result = this.moveService.CanMove(matrix, direction, robotType);
             if (result.Success)

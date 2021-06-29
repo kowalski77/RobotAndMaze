@@ -58,7 +58,7 @@ namespace RobotAndMaze.Infrastructure
             Console.WriteLine("[s] - Move back");
             Console.WriteLine("[a] - Move left");
             Console.WriteLine("[d] - Move right");
-            Console.WriteLine("[x] - Last");
+            Console.WriteLine("[x] - Exit game");
         }
 
         public void PrintUnknownOption()
