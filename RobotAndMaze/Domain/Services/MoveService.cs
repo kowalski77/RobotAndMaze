@@ -1,6 +1,7 @@
 ﻿using System;
 using RobotAndMaze.Domain.Factories;
 using RobotAndMaze.Domain.Models;
+using RobotAndMaze.Domain.Models.Abstractions;
 using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Domain.Services
@@ -14,14 +15,14 @@ namespace RobotAndMaze.Domain.Services
             this.machineProviderFactory = machineProviderFactory;
         }
 
-        public Result<Coordinates> CanMove(Matrix matrix, Direction direction, IRobotType machineType)
+        public Result<Coordinates> CanMove(Matrix matrix, Direction direction, RobotType machineType)
         {
             var machineProvider = this.machineProviderFactory.CreateMachineProvider(machineType);
 
             return machineProvider.CheckCoordinates(matrix, direction);
         } 
 
-        public Matrix Move(Matrix matrix, Direction direction, IRobotType machineType)
+        public Matrix Move(Matrix matrix, Direction direction, RobotType machineType)
         {
             var result = this.CanMove(matrix, direction, machineType);
             if (!result.Success)

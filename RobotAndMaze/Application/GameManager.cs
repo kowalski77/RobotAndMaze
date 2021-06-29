@@ -21,7 +21,7 @@ namespace RobotAndMaze.Application
             this.gameDisplay = gameDisplay;
         }
 
-        public void Run(IRobotType robotType)
+        public void Run(RobotType robotType)
         {
             this.gameDisplay.PrintStart();
 
@@ -52,7 +52,7 @@ namespace RobotAndMaze.Application
             }
         }
 
-        private Matrix MakeMovement(ConsoleKey key, IRobotType robotType, Matrix matrix)
+        private Matrix MakeMovement(ConsoleKey key, RobotType robotType, Matrix matrix)
         {
             switch (key)
             {
@@ -68,6 +68,18 @@ namespace RobotAndMaze.Application
                 case ConsoleKey.D:
                     matrix = this.MakeMovement(robotType, matrix, Direction.Right);
                     break;
+                case ConsoleKey.Q:
+                    matrix = this.MakeMovement(robotType, matrix, Direction.UpLeft);
+                    break;
+                case ConsoleKey.E:
+                    matrix = this.MakeMovement(robotType, matrix, Direction.UpRight);
+                    break;
+                case ConsoleKey.Z:
+                    matrix = this.MakeMovement(robotType, matrix, Direction.DownLeft);
+                    break;
+                case ConsoleKey.C:
+                    matrix = this.MakeMovement(robotType, matrix, Direction.DownRight);
+                    break;
                 default:
                     this.gameDisplay.PrintUnknownOption();
                     break;
@@ -76,7 +88,7 @@ namespace RobotAndMaze.Application
             return matrix;
         }
 
-        private Matrix MakeMovement(IRobotType robotType, Matrix matrix, Direction direction)
+        private Matrix MakeMovement(RobotType robotType, Matrix matrix, Direction direction)
         {
             var result = this.moveService.CanMove(matrix, direction, robotType);
             if (result.Success)

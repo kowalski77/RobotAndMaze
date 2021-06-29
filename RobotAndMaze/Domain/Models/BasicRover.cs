@@ -1,4 +1,6 @@
-﻿namespace RobotAndMaze.Domain.Models
+﻿using RobotAndMaze.Domain.Models.Abstractions;
+
+namespace RobotAndMaze.Domain.Models
 {
     public class BasicRover : IRover
     {
@@ -9,7 +11,7 @@
 
         public string Name { get; }
 
-        public IRobotType MachineType => IRobotType.BasicRover;
+        public RobotType RobotType => RobotType.BasicRover;
 
         public Step Forward => Step.CreateInstance(1);
 

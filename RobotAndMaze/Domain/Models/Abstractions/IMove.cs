@@ -1,4 +1,4 @@
-﻿namespace RobotAndMaze.Domain.Models
+﻿namespace RobotAndMaze.Domain.Models.Abstractions
 {
     public interface IMove
     {

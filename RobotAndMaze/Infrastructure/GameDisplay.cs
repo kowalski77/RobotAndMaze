@@ -58,6 +58,10 @@ namespace RobotAndMaze.Infrastructure
             Console.WriteLine("[s] - Move back");
             Console.WriteLine("[a] - Move left");
             Console.WriteLine("[d] - Move right");
+            Console.WriteLine("[q] - Move UpLeft");
+            Console.WriteLine("[e] - Move UpRight");
+            Console.WriteLine("[z] - Move DownLeft");
+            Console.WriteLine("[c] - Move DownRight");
             Console.WriteLine("[x] - Exit game");
         }
 
