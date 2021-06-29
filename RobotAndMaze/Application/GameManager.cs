@@ -13,7 +13,7 @@ namespace RobotAndMaze.Application
 
         public GameManager(
             IMatrixProvider matrixProvider,
-            IGameDisplay gameDisplay, 
+            IGameDisplay gameDisplay,
             IMoveService moveService)
         {
             this.matrixProvider = matrixProvider;
@@ -27,25 +27,19 @@ namespace RobotAndMaze.Application
 
             var matrix = this.matrixProvider.GetBasic();
             this.gameDisplay.PrintMatrix(matrix);
-            
+
             while (true)
             {
                 this.gameDisplay.PrintOptions();
 
                 var key = Console.ReadKey().Key;
-                if (key == ConsoleKey.X)
-                {
-                    return;
-                }
+                if (key == ConsoleKey.X) return;
 
                 matrix = this.MakeMovement(key, robotType, matrix);
 
                 this.gameDisplay.PrintMatrix(matrix);
 
-                if (!this.moveService.CheckFinish(matrix))
-                {
-                    continue;
-                }
+                if (!this.moveService.CheckFinish(matrix)) continue;
 
                 this.gameDisplay.PrintEnd();
                 return;
@@ -91,10 +85,7 @@ namespace RobotAndMaze.Application
         private Matrix MakeMovement(RobotType robotType, Matrix matrix, Direction direction)
         {
             var result = this.moveService.CanMove(matrix, direction, robotType);
-            if (result.Success)
-            {
-                matrix = this.moveService.Move(matrix, direction, robotType);
-            }
+            if (result.Success) matrix = this.moveService.Move(matrix, direction, robotType);
 
             this.gameDisplay.PrintResult(result);
 

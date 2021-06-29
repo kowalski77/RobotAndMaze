@@ -1,7 +1,6 @@
 ﻿using System;
 using RobotAndMaze.Domain.Factories;
 using RobotAndMaze.Domain.Models;
-using RobotAndMaze.Domain.Models.Abstractions;
 using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Domain.Services
@@ -20,7 +19,7 @@ namespace RobotAndMaze.Domain.Services
             var machineProvider = this.machineProviderFactory.CreateMachineProvider(machineType);
 
             return machineProvider.CheckCoordinates(matrix, direction);
-        } 
+        }
 
         public Matrix Move(Matrix matrix, Direction direction, RobotType machineType)
         {
@@ -29,7 +28,7 @@ namespace RobotAndMaze.Domain.Services
             {
                 throw new InvalidOperationException($"Can not move due to: {result.Error}");
             }
-            
+
             var newlyMatrix = matrix.WithUpdatedCurrentCell(result.Value);
 
             return newlyMatrix;

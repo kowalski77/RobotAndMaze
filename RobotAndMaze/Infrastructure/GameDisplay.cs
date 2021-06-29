@@ -1,6 +1,6 @@
-﻿using RobotAndMaze.Domain.Models;
+﻿using System;
+using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Support;
-using System;
 
 namespace RobotAndMaze.Infrastructure
 {
@@ -13,13 +13,14 @@ namespace RobotAndMaze.Infrastructure
             var rowLength = matrix.Cells.GetLength(0);
             var colLength = matrix.Cells.GetLength(1);
 
-            for (var j = colLength -1 ; j >= 0; j--)
+            for (var j = colLength - 1; j >= 0; j--)
             {
                 for (var i = 0; i < rowLength; i++)
                 {
                     var icon = GetIcon(matrix.Cells[i, j]);
                     Console.Write(icon);
                 }
+
                 Console.Write(Environment.NewLine);
             }
 
@@ -74,9 +75,9 @@ namespace RobotAndMaze.Infrastructure
         {
             return cell switch
             {
-                { Current: true } => "C",
-                { Last: true } => "E",
-                { Blocked: true } => "X",
+                {Current: true} => "C",
+                {Last: true} => "E",
+                {Blocked: true} => "X",
                 _ => "_"
             };
         }

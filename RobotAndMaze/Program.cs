@@ -9,6 +9,13 @@ namespace RobotAndMaze
 {
     internal static class Program
     {
+        private static readonly Dictionary<RobotType, MachineProvider> MachineProviders = new()
+        {
+            {RobotType.BasicRover, new RoverMachineProvider(new BasicRover("Jessie"))},
+            {RobotType.AdvancedRover, new RoverMachineProvider(new AdvancedRover("Walter"))},
+            {RobotType.BasicHelicopter, new HelicopterMachineProvider(new BasicHelicopter("Skyler"))}
+        };
+
         private static void Main()
         {
             var gameManager = new GameManager(
@@ -19,12 +26,5 @@ namespace RobotAndMaze
 
             gameManager.Run(RobotType.BasicHelicopter);
         }
-
-        private static readonly Dictionary<RobotType, MachineProvider> MachineProviders = new()
-        {
-            { RobotType.BasicRover, new RoverMachineProvider(new BasicRover("Jessie")) },
-            { RobotType.AdvancedRover, new RoverMachineProvider(new AdvancedRover("Walter")) },
-            { RobotType.BasicHelicopter, new HelicopterMachineProvider(new BasicHelicopter("Skyler")) }
-        };
     }
 }

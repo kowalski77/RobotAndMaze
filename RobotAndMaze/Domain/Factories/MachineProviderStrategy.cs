@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using RobotAndMaze.Domain.Models;
-using RobotAndMaze.Domain.Models.Abstractions;
 
 namespace RobotAndMaze.Domain.Factories
 {
@@ -16,9 +15,9 @@ namespace RobotAndMaze.Domain.Factories
 
         public MachineProvider CreateMachineProvider(RobotType robotType)
         {
-            return this.strategies.TryGetValue(robotType, out var strategy) ? 
-                strategy : 
-                throw new InvalidOperationException($"Could not found any strategy for robot of type: {nameof(robotType)}");
+            return this.strategies.TryGetValue(robotType, out var strategy)
+                ? strategy
+                : throw new InvalidOperationException($"Could not found any strategy for robot of type: {nameof(robotType)}");
         }
     }
 }

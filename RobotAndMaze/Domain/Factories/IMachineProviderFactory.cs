@@ -1,5 +1,4 @@
 ﻿using RobotAndMaze.Domain.Models;
-using RobotAndMaze.Domain.Models.Abstractions;
 
 namespace RobotAndMaze.Domain.Factories
 {
