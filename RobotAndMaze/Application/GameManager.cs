@@ -21,7 +21,7 @@ namespace RobotAndMaze.Application
             this.gameDisplay = gameDisplay;
         }
 
-        public void Run()
+        public void Run(IRobotType robotType)
         {
             this.gameDisplay.PrintStart();
 
@@ -39,16 +39,16 @@ namespace RobotAndMaze.Application
                         this.gameDisplay.PrintEnd();
                         return;
                     case ConsoleKey.W:
-                        matrix = this.MakeMovement(matrix, Direction.Forward);
+                        matrix = this.MakeMovement(matrix, Direction.Forward, robotType);
                         break;
                     case ConsoleKey.S:
-                        matrix = this.MakeMovement(matrix, Direction.Back);
+                        matrix = this.MakeMovement(matrix, Direction.Back, robotType);
                         break;
                     case ConsoleKey.A:
-                        matrix = this.MakeMovement(matrix, Direction.Left);
+                        matrix = this.MakeMovement(matrix, Direction.Left, robotType);
                         break;
                     case ConsoleKey.D:
-                        matrix = this.MakeMovement(matrix, Direction.Right);
+                        matrix = this.MakeMovement(matrix, Direction.Right, robotType);
                         break;
                     default:
                         this.gameDisplay.PrintUnknownOption();
@@ -67,12 +67,12 @@ namespace RobotAndMaze.Application
             }
         }
 
-        private Matrix MakeMovement(Matrix matrix, Direction direction)
+        private Matrix MakeMovement(Matrix matrix, Direction direction, IRobotType robotType)
         {
-            var result = this.moveService.CanMove(matrix, direction, MachineType.BasicRover);
+            var result = this.moveService.CanMove(matrix, direction, robotType);
             if (result.Success)
             {
-                matrix = this.moveService.Move(matrix, direction, MachineType.BasicRover);
+                matrix = this.moveService.Move(matrix, direction, robotType);
             }
 
             this.gameDisplay.PrintResult(result);

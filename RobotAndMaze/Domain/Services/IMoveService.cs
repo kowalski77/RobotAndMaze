@@ -5,9 +5,9 @@ namespace RobotAndMaze.Domain.Services
 {
     public interface IMoveService
     {
-        Result<Coordinates> CanMove(Matrix matrix, Direction direction, MachineType machineType);
+        Result<Coordinates> CanMove(Matrix matrix, Direction direction, IRobotType machineType);
         
-        Matrix Move(Matrix matrix, Direction direction, MachineType machineType);
+        Matrix Move(Matrix matrix, Direction direction, IRobotType machineType);
 
         bool CheckFinish(Matrix matrix);
     }

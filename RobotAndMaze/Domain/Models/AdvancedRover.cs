@@ -9,7 +9,7 @@
 
         public string Name { get; }
 
-        public MachineType MachineType => MachineType.AdvancedRover;
+        public IRobotType MachineType => IRobotType.AdvancedRover;
 
         public Step Forward => Step.CreateInstance(2);
 

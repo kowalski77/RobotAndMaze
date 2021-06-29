@@ -17,13 +17,13 @@ namespace RobotAndMaze
                 new MoveService(
                     new MachineProviderStrategy(MachineProviders)));
 
-            gameManager.Run();
+            gameManager.Run(IRobotType.BasicRover);
         }
 
-        private static readonly Dictionary<MachineType, MachineProvider> MachineProviders = new()
+        private static readonly Dictionary<IRobotType, MachineProvider> MachineProviders = new()
         {
-            { MachineType.BasicRover, new RobotMachineProvider(new BasicRover("Max")) },
-            { MachineType.AdvancedRover, new RobotMachineProvider(new AdvancedRover("Arthur")) }
+            { IRobotType.BasicRover, new RobotMachineProvider(new BasicRover("Max")) },
+            { IRobotType.AdvancedRover, new RobotMachineProvider(new AdvancedRover("Arthur")) }
         };
     }
 }

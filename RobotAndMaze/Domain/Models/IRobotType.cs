@@ -1,6 +1,6 @@
 ﻿namespace RobotAndMaze.Domain.Models
 {
-    public enum MachineType
+    public enum IRobotType
     {
         Unknown,
         BasicRover,

@@ -1,6 +1,6 @@
 ﻿namespace RobotAndMaze.Domain.Models
 {
-    public interface IRover : IMachine, IMove
+    public interface IRover : IRobot, IMove
     {
     }
 }

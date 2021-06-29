@@ -14,14 +14,14 @@ namespace RobotAndMaze.Domain.Services
             this.machineProviderFactory = machineProviderFactory;
         }
 
-        public Result<Coordinates> CanMove(Matrix matrix, Direction direction, MachineType machineType)
+        public Result<Coordinates> CanMove(Matrix matrix, Direction direction, IRobotType machineType)
         {
             var machineProvider = this.machineProviderFactory.CreateMachineProvider(machineType);
 
             return machineProvider.CheckCoordinates(matrix, direction);
         } 
 
-        public Matrix Move(Matrix matrix, Direction direction, MachineType machineType)
+        public Matrix Move(Matrix matrix, Direction direction, IRobotType machineType)
         {
             var result = this.CanMove(matrix, direction, machineType);
             if (!result.Success)

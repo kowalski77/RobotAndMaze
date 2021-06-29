@@ -4,6 +4,6 @@ namespace RobotAndMaze.Domain.Factories
 {
     public interface IMachineProviderFactory
     {
-        MachineProvider CreateMachineProvider(MachineType machineType);
+        MachineProvider CreateMachineProvider(IRobotType machineType);
     }
 }

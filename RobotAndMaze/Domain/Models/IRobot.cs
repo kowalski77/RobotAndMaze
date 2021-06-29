@@ -1,9 +1,9 @@
 ﻿namespace RobotAndMaze.Domain.Models
 {
-    public interface IMachine
+    public interface IRobot
     {
         string Name { get; }
 
-        MachineType MachineType { get; }
+        IRobotType MachineType { get; }
     }
 }
