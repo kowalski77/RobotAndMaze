@@ -2,7 +2,6 @@
 {
     public enum RobotType
     {
-        Unknown,
         BasicRover,
         AdvancedRover,
         BasicHelicopter
