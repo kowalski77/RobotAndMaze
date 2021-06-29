@@ -3,13 +3,10 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <None Remove="Support\MatrixSeed.cs~RFbce5ba.TMP" />
-    </ItemGroup>
-
-    <ItemGroup>
+  <ItemGroup>
       <Folder Include="Application" />
     </ItemGroup>
 

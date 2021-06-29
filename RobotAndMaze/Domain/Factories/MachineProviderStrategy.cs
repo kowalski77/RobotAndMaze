@@ -13,9 +13,11 @@ namespace RobotAndMaze.Domain.Factories
             this.strategies = strategies ?? throw new ArgumentNullException(nameof(strategies));
         }
 
-        public MachineProvider CreateMachineProvider(IRobotType machineType)
+        public MachineProvider CreateMachineProvider(IRobotType robotType)
         {
-            return this.strategies.TryGetValue(machineType, out var strategy) ? strategy : default;
+            return this.strategies.TryGetValue(robotType, out var strategy) ? 
+                strategy : 
+                throw new InvalidOperationException($"Could not found any strategy for robot of type: {nameof(robotType)}");
         }
     }
 }
