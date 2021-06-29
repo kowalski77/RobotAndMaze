@@ -22,8 +22,8 @@ namespace RobotAndMaze
 
         private static readonly Dictionary<IRobotType, MachineProvider> MachineProviders = new()
         {
-            { IRobotType.BasicRover, new RobotMachineProvider(new BasicRover("Max")) },
-            { IRobotType.AdvancedRover, new RobotMachineProvider(new AdvancedRover("Arthur")) }
+            { IRobotType.BasicRover, new RoverMachineProvider(new BasicRover("Max")) },
+            { IRobotType.AdvancedRover, new RoverMachineProvider(new AdvancedRover("Arthur")) }
         };
     }
 }

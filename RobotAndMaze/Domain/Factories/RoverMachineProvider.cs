@@ -4,11 +4,11 @@ using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Domain.Factories
 {
-    public class RobotMachineProvider : MachineProvider
+    public class RoverMachineProvider : MachineProvider
     {
         private readonly IRover robot;
 
-        public RobotMachineProvider(IRover robot)
+        public RoverMachineProvider(IRover robot)
         {
             this.robot = robot ?? throw new ArgumentNullException(nameof(robot));
         }
