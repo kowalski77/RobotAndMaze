@@ -1,13 +1,15 @@
 ﻿namespace RobotAndMaze.Domain.Models
 {
-    public class Robot : IRobot
+    public class BasicRobot : IRobot
     {
-        public Robot(string name)
+        public BasicRobot(string name)
         {
             this.Name = name;
         }
 
         public string Name { get; }
+
+        public MachineType MachineType => MachineType.Rover;
 
         public Step Forward => Step.CreateInstance(1);
 

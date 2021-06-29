@@ -1,4 +1,5 @@
 ﻿using System;
+using RobotAndMaze.Domain.Factories;
 using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Support;
 
@@ -6,29 +7,18 @@ namespace RobotAndMaze.Domain.Services
 {
     public class MoveService : IMoveService
     {
-        private readonly IRobot robot;
+        private readonly IMachineProviderFactory machineProviderFactory;
 
-        public MoveService(IRobot robot)
+        public MoveService(IMachineProviderFactory machineProviderFactory)
         {
-            this.robot = robot ?? throw new ArgumentNullException(nameof(robot));
+            this.machineProviderFactory = machineProviderFactory;
         }
-        
+
         public Result<Coordinates> CanMove(Matrix matrix, Direction direction)
         {
-            var coordinates = matrix.CurrentCoordinates;
+            var machineProvider = this.machineProviderFactory.CreateMachineProvider(MachineType.Rover);
 
-            var result = direction switch
-            {
-                Direction.Forward => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos + this.robot.Forward.Value),
-                Direction.Back => matrix.CheckCoordinates(coordinates.XPos, coordinates.YPos - this.robot.Back.Value),
-                Direction.Left => matrix.CheckCoordinates(coordinates.XPos - this.robot.Left.Value, coordinates.YPos),
-                Direction.Right => matrix.CheckCoordinates(coordinates.XPos + this.robot.Right.Value, coordinates.YPos),
-                _ => throw new ArgumentOutOfRangeException($"{nameof(direction)} not available.")
-            };
-            
-            return result.Success ? 
-                Result.Ok(result.Value) : 
-                Result.Fail<Coordinates>($"Could not make a movement due to: {result.Error}");
+            return machineProvider.CheckCoordinates(matrix, direction);
         } 
 
         public Matrix Move(Matrix matrix, Direction direction)
