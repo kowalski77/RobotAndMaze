@@ -14,16 +14,16 @@ namespace RobotAndMaze.Domain.Services
             this.machineProviderFactory = machineProviderFactory;
         }
 
-        public Result<Coordinates> CanMove(Matrix matrix, Direction direction)
+        public Result<Coordinates> CanMove(Matrix matrix, Direction direction, MachineType machineType)
         {
-            var machineProvider = this.machineProviderFactory.CreateMachineProvider(MachineType.Rover);
+            var machineProvider = this.machineProviderFactory.CreateMachineProvider(machineType);
 
             return machineProvider.CheckCoordinates(matrix, direction);
         } 
 
-        public Matrix Move(Matrix matrix, Direction direction)
+        public Matrix Move(Matrix matrix, Direction direction, MachineType machineType)
         {
-            var result = this.CanMove(matrix, direction);
+            var result = this.CanMove(matrix, direction, machineType);
             if (!result.Success)
             {
                 throw new InvalidOperationException($"Can not move due to: {result.Error}");
