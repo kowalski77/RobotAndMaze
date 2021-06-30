@@ -1,24 +1,24 @@
 ﻿using System;
-using RobotAndMaze.Domain.Factories;
 using RobotAndMaze.Domain.Models;
+using RobotAndMaze.Domain.Strategies;
 using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Domain.Services
 {
     public class MoveService : IMoveService
     {
-        private readonly IMachineProviderFactory machineProviderFactory;
+        private readonly IMoveStrategy moveStrategy;
 
-        public MoveService(IMachineProviderFactory machineProviderFactory)
+        public MoveService(IMoveStrategy moveStrategy)
         {
-            this.machineProviderFactory = machineProviderFactory;
+            this.moveStrategy = moveStrategy ?? throw new ArgumentNullException(nameof(moveStrategy));
         }
 
         public Result<Coordinates> CanMove(Matrix matrix, Direction direction, RobotType machineType)
         {
-            var machineProvider = this.machineProviderFactory.CreateMachineProvider(machineType);
+            var coordinates = this.moveStrategy.CanMove(matrix, direction, machineType);
 
-            return machineProvider.CheckCoordinates(matrix, direction);
+            return coordinates;
         }
 
         public Matrix Move(Matrix matrix, Direction direction, RobotType machineType)

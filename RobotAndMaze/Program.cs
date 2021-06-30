@@ -1,19 +1,18 @@
-﻿using System.Collections.Generic;
-using RobotAndMaze.Application;
-using RobotAndMaze.Domain.Factories;
+﻿using RobotAndMaze.Application;
 using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Domain.Services;
+using RobotAndMaze.Domain.Strategies;
 using RobotAndMaze.Infrastructure;
 
 namespace RobotAndMaze
 {
     internal static class Program
     {
-        private static readonly Dictionary<RobotType, MachineProvider> MachineProviders = new()
+        private static readonly IRobotMoveFactory[] RobotMoveFactories =
         {
-            {RobotType.BasicRover, new RoverMachineProvider(new BasicRover("Jessie"))},
-            {RobotType.AdvancedRover, new RoverMachineProvider(new AdvancedRover("Walter"))},
-            {RobotType.BasicHelicopter, new HelicopterMachineProvider(new BasicHelicopter("Skyler"))}
+            new RoverMoveFactory(new BasicRover("Jessie")),
+            new RoverMoveFactory(new AdvancedRover("Walter")),
+            new HelicopterMoveFactory(new BasicHelicopter("Skyler"))
         };
 
         private static void Main()
@@ -22,9 +21,9 @@ namespace RobotAndMaze
                 new MatrixProvider(),
                 new GameDisplay(),
                 new MoveService(
-                    new MachineProviderStrategy(MachineProviders)));
+                    new MoveStrategy(RobotMoveFactories)));
 
-            gameManager.Run(RobotType.BasicHelicopter);
+            gameManager.Run(RobotType.BasicRover);
         }
     }
 }

@@ -3,18 +3,20 @@ using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Domain.Models.Abstractions;
 using RobotAndMaze.Support;
 
-namespace RobotAndMaze.Domain.Factories
+namespace RobotAndMaze.Domain.Strategies
 {
-    public class HelicopterMachineProvider : MachineProvider
+    public class HelicopterMoveFactory : IRobotMoveFactory
     {
         private readonly IHelicopter helicopter;
 
-        public HelicopterMachineProvider(IHelicopter helicopter)
+        public HelicopterMoveFactory(IHelicopter helicopter)
         {
             this.helicopter = helicopter ?? throw new ArgumentNullException(nameof(helicopter));
         }
 
-        public override Result<Coordinates> CheckCoordinates(Matrix matrix, Direction direction)
+        public RobotType RobotType => this.helicopter.RobotType;
+
+        public Result<Coordinates> CheckCoordinates(Matrix matrix, Direction direction)
         {
             var coordinates = matrix.CurrentCoordinates;
 
