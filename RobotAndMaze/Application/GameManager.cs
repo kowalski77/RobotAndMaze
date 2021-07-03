@@ -24,14 +24,12 @@ namespace RobotAndMaze.Application
         public void Run(RobotType robotType)
         {
             this.gameDisplay.PrintStart();
-
+            this.gameDisplay.PrintOptions();
             var matrix = this.matrixProvider.GetBasic();
             this.gameDisplay.PrintMatrix(matrix);
 
             while (true)
             {
-                this.gameDisplay.PrintOptions();
-
                 var key = Console.ReadKey().Key;
                 if (key == ConsoleKey.X)
                 {

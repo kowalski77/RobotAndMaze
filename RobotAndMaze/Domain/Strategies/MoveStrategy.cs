@@ -16,10 +16,10 @@ namespace RobotAndMaze.Domain.Strategies
 
         public Result<Coordinates> CanMove(Matrix matrix, Direction direction, RobotType robotType)
         {
-            var moveFactory = this.robotMoveFactory.First(x => x.RobotType == robotType);
+            var moveFactory = this.robotMoveFactory.FirstOrDefault(x => x.RobotType == robotType);
             if (moveFactory == null)
             {
-                throw new InvalidOperationException($"Could not found any strategy for robot of type: {nameof(robotType)}");
+                throw new InvalidOperationException($"Could not found any move strategy for robot of type: {nameof(robotType)}");
             }
 
             return moveFactory.CheckCoordinates(matrix, direction);

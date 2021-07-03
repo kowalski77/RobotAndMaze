@@ -16,9 +16,9 @@ namespace RobotAndMaze.Domain.Services
 
         public Result<Coordinates> CanMove(Matrix matrix, Direction direction, RobotType machineType)
         {
-            var coordinates = this.moveStrategy.CanMove(matrix, direction, machineType);
+            var result = this.moveStrategy.CanMove(matrix, direction, machineType);
 
-            return coordinates;
+            return result;
         }
 
         public Matrix Move(Matrix matrix, Direction direction, RobotType machineType)
