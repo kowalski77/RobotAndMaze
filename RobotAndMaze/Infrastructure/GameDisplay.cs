@@ -16,14 +16,11 @@ namespace RobotAndMaze.Infrastructure
 
             Console.WriteLine(Resources.Separator);
 
-            var rowLength = matrix.Cells.GetLength(0);
-            var colLength = matrix.Cells.GetLength(1);
-
-            for (var j = colLength - 1; j >= 0; j--)
+            for (var j = matrix.ColumnLength - 1; j >= 0; j--)
             {
-                for (var i = 0; i < rowLength; i++)
+                for (var i = 0; i < matrix.RowLength; i++)
                 {
-                    var icon = GetIcon(matrix.Cells[i, j]);
+                    var icon = GetIcon(matrix.GetCell(i, j));
                     Console.Write(icon);
                 }
 

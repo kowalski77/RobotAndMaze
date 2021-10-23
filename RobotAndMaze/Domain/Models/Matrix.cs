@@ -6,13 +6,22 @@ namespace RobotAndMaze.Domain.Models
 {
     public class Matrix
     {
+        private readonly Cell[,] cells;
+
         public Matrix(Cell[,] cells, Coordinates currentCoordinates)
         {
-            this.Cells = cells;
+            this.cells = cells;
             this.CurrentCoordinates = currentCoordinates;
         }
 
-        public Cell[,] Cells { get; }
+        public int RowLength => this.cells.GetLength(0);
+
+        public int ColumnLength => this.cells.GetLength(1);
+
+        public Cell GetCell(int xPos, int yPos)
+        {
+            return this.cells[xPos, yPos];
+        }
 
         public Coordinates CurrentCoordinates { get; }
 
@@ -20,7 +29,7 @@ namespace RobotAndMaze.Domain.Models
         {
             try
             {
-                var cell = this.Cells[xPos, yPos];
+                var cell = this.cells[xPos, yPos];
 
                 return cell.Blocked
                     ? Result.Fail<Coordinates>($"Coordinates x:{xPos.ToString(CultureInfo.InvariantCulture)}, y:{yPos.ToString(CultureInfo.InvariantCulture)} is blocked")
@@ -38,15 +47,15 @@ namespace RobotAndMaze.Domain.Models
 
         public bool CheckFinish(Coordinates coordinates)
         {
-            return this.Cells[coordinates.XPos, coordinates.YPos].Last;
+            return this.cells[coordinates.XPos, coordinates.YPos].Last;
         }
 
         public Matrix WithUpdatedCurrentCell(Coordinates newCoordinates)
         {
-            this.Cells[this.CurrentCoordinates.XPos, this.CurrentCoordinates.YPos].SetCurrent(false);
-            this.Cells[newCoordinates.XPos, newCoordinates.YPos].SetCurrent(true);
+            this.cells[this.CurrentCoordinates.XPos, this.CurrentCoordinates.YPos].SetCurrent(false);
+            this.cells[newCoordinates.XPos, newCoordinates.YPos].SetCurrent(true);
 
-            return new(this.Cells, newCoordinates);
+            return new Matrix(this.cells, newCoordinates);
         }
     }
 }
