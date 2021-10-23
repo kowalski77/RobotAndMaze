@@ -10,7 +10,7 @@ namespace RobotAndMaze.Domain.Models
 
         public Matrix(Cell[,] cells, Coordinates currentCoordinates)
         {
-            this.cells = cells;
+            this.cells = cells ?? throw new ArgumentNullException(nameof(cells));
             this.CurrentCoordinates = currentCoordinates;
         }
 
