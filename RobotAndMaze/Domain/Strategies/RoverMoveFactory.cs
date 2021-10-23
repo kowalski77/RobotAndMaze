@@ -1,4 +1,5 @@
-﻿using RobotAndMaze.Domain.Models;
+﻿using System;
+using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Domain.Models.Abstractions;
 using RobotAndMaze.Support;
 
@@ -14,6 +15,11 @@ namespace RobotAndMaze.Domain.Strategies
 
         public override Result<Coordinates> CheckCoordinates(Matrix matrix, Direction direction)
         {
+            if (matrix == null)
+            {
+                throw new ArgumentNullException(nameof(matrix));
+            }
+
             var coordinates = matrix.CurrentCoordinates;
 
             var result = direction switch

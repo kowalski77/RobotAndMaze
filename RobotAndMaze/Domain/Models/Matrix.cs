@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Domain.Models
@@ -22,7 +23,7 @@ namespace RobotAndMaze.Domain.Models
                 var cell = this.Cells[xPos, yPos];
 
                 return cell.Blocked
-                    ? Result.Fail<Coordinates>($"Coordinates x:{xPos.ToString()}, y:{yPos.ToString()} is blocked")
+                    ? Result.Fail<Coordinates>($"Coordinates x:{xPos.ToString(CultureInfo.InvariantCulture)}, y:{yPos.ToString(CultureInfo.InvariantCulture)} is blocked")
                     : Result.Ok(new Coordinates
                     {
                         XPos = xPos,
@@ -31,7 +32,7 @@ namespace RobotAndMaze.Domain.Models
             }
             catch (IndexOutOfRangeException)
             {
-                return Result.Fail<Coordinates>($"Coordinates x:{xPos.ToString()}, y:{yPos.ToString()} out of the matrix limits");
+                return Result.Fail<Coordinates>($"Coordinates x:{xPos.ToString(CultureInfo.InvariantCulture)}, y:{yPos.ToString(CultureInfo.InvariantCulture)} out of the matrix limits");
             }
         }
 

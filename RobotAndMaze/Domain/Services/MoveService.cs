@@ -23,6 +23,11 @@ namespace RobotAndMaze.Domain.Services
 
         public Matrix Move(Matrix matrix, Direction direction, RobotType machineType)
         {
+            if (matrix == null)
+            {
+                throw new ArgumentNullException(nameof(matrix));
+            }
+
             var result = this.CanMove(matrix, direction, machineType);
             if (!result.Success)
             {
@@ -36,6 +41,11 @@ namespace RobotAndMaze.Domain.Services
 
         public bool CheckFinish(Matrix matrix)
         {
+            if (matrix == null)
+            {
+                throw new ArgumentNullException(nameof(matrix));
+            }
+
             return matrix.CheckFinish(matrix.CurrentCoordinates);
         }
     }

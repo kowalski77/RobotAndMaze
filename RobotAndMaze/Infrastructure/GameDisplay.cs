@@ -1,5 +1,6 @@
 ﻿using System;
 using RobotAndMaze.Domain.Models;
+using RobotAndMaze.Properties;
 using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Infrastructure
@@ -8,7 +9,12 @@ namespace RobotAndMaze.Infrastructure
     {
         public void PrintMatrix(Matrix matrix)
         {
-            Console.WriteLine("===============");
+            if (matrix == null)
+            {
+                throw new ArgumentNullException(nameof(matrix));
+            }
+
+            Console.WriteLine(Resources.Separator);
 
             var rowLength = matrix.Cells.GetLength(0);
             var colLength = matrix.Cells.GetLength(1);
@@ -24,11 +30,16 @@ namespace RobotAndMaze.Infrastructure
                 Console.Write(Environment.NewLine);
             }
 
-            Console.WriteLine("===============");
+            Console.WriteLine(Resources.Separator);
         }
 
         public void PrintResult(Result result)
         {
+            if (result == null)
+            {
+                throw new ArgumentNullException(nameof(result));
+            }
+
             Console.WriteLine();
 
             if (!result.Success)
@@ -37,47 +48,47 @@ namespace RobotAndMaze.Infrastructure
                 return;
             }
 
-            Console.WriteLine("Success!");
+            Console.WriteLine(Resources.Success);
         }
 
         public void PrintStart()
         {
-            Console.WriteLine("== Start Game ==");
+            Console.WriteLine(Resources.StartGame);
             Console.WriteLine();
         }
 
         public void PrintEnd()
         {
-            Console.WriteLine("== End Game ==");
+            Console.WriteLine(Resources.EndGame);
             Console.WriteLine();
         }
 
         public void PrintOptions()
         {
-            Console.WriteLine("---- Select a movement ----");
-            Console.WriteLine("[w] - Move forward");
-            Console.WriteLine("[s] - Move back");
-            Console.WriteLine("[a] - Move left");
-            Console.WriteLine("[d] - Move right");
-            Console.WriteLine("[q] - Move UpLeft");
-            Console.WriteLine("[e] - Move UpRight");
-            Console.WriteLine("[z] - Move DownLeft");
-            Console.WriteLine("[c] - Move DownRight");
-            Console.WriteLine("[x] - Exit game");
+            Console.WriteLine(Resources.SelectMovement);
+            Console.WriteLine(Resources.MoveForward);
+            Console.WriteLine(Resources.MoveBack);
+            Console.WriteLine(Resources.MoveLeft);
+            Console.WriteLine(Resources.MoveRight);
+            Console.WriteLine(Resources.MoveUpLeft);
+            Console.WriteLine(Resources.MoveUpRight);
+            Console.WriteLine(Resources.MoveDownLeft);
+            Console.WriteLine(Resources.MoveDownRight);
+            Console.WriteLine(Resources.ExitGame);
         }
 
         public void PrintUnknownOption()
         {
-            Console.WriteLine("Unknown option");
+            Console.WriteLine(Resources.UnknownOption);
         }
 
         private static string GetIcon(Cell cell)
         {
             return cell switch
             {
-                {Current: true} => "C",
-                {Last: true} => "E",
-                {Blocked: true} => "X",
+                { Current: true } => "C",
+                { Last: true } => "E",
+                { Blocked: true } => "X",
                 _ => "_"
             };
         }
