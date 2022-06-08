@@ -1,28 +1,47 @@
-﻿using RobotAndMaze.Application;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RobotAndMaze.Application;
 using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Domain.Services;
 using RobotAndMaze.Domain.Strategies;
 using RobotAndMaze.Infrastructure;
 
-namespace RobotAndMaze;
 
-internal static class Program
+IServiceProvider serviceProvider;
+
+ConfigureServices();
+
+var gameManager = serviceProvider.GetRequiredService<GameManager>();
+gameManager.Run(RobotType.BasicRover);
+
+DisposeServices();
+
+void ConfigureServices()
 {
-    private static readonly IRobotMoveFactory[] RobotMoveFactories =
+    IRobotMoveFactory[] robotMoveFactories =
     {
         new RoverMoveFactory(new BasicRover("Jessie")),
         new RoverMoveFactory(new AdvancedRover("Walter")),
         new HelicopterMoveFactory(new BasicHelicopter("Skyler"))
     };
 
-    private static void Main()
-    {
-        var gameManager = new GameManager(
-            new MatrixProvider(),
-            new GameDisplay(),
-            new MoveService(
-                new MoveStrategy(RobotMoveFactories)));
+    var services = new ServiceCollection();
+    services.AddTransient<GameManager>();
+    services.AddTransient<IMatrixProvider, MatrixProvider>();
+    services.AddTransient<IGameDisplay, GameDisplay>();
+    services.AddTransient<IMoveService, MoveService>();
+    services.AddTransient<IMoveStrategy, MoveStrategy>(_ => new MoveStrategy(robotMoveFactories));
 
-        gameManager.Run(RobotType.BasicRover);
+    serviceProvider = services.BuildServiceProvider();
+}
+
+void DisposeServices()
+{
+    switch (serviceProvider)
+    {
+        case null:
+            return;
+        case IDisposable disposable:
+            disposable.Dispose();
+            break;
     }
 }
