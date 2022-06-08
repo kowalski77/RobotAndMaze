@@ -1,13 +1,12 @@
-﻿namespace RobotAndMaze.Domain.Models.Abstractions
+﻿namespace RobotAndMaze.Domain.Models.Abstractions;
+
+public interface IFly
 {
-    public interface IFly
-    {
-        int UpRight { get; }
+    int UpRight { get; }
 
-        int UpLeft { get; }
+    int UpLeft { get; }
 
-        int DownRight { get; }
+    int DownRight { get; }
 
-        int DownLeft { get; }
-    }
+    int DownLeft { get; }
 }

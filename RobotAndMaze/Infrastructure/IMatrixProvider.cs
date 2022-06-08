@@ -1,9 +1,8 @@
 ﻿using RobotAndMaze.Domain.Models;
 
-namespace RobotAndMaze.Infrastructure
+namespace RobotAndMaze.Infrastructure;
+
+public interface IMatrixProvider
 {
-    public interface IMatrixProvider
-    {
-        Matrix GetBasic();
-    }
+    Matrix GetBasic();
 }

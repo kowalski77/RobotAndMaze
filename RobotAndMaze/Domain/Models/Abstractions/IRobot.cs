@@ -1,9 +1,8 @@
-﻿namespace RobotAndMaze.Domain.Models.Abstractions
-{
-    public interface IRobot
-    {
-        string Name { get; }
+﻿namespace RobotAndMaze.Domain.Models.Abstractions;
 
-        RobotType RobotType { get; }
-    }
+public interface IRobot
+{
+    string Name { get; }
+
+    RobotType RobotType { get; }
 }

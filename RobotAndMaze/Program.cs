@@ -4,26 +4,25 @@ using RobotAndMaze.Domain.Services;
 using RobotAndMaze.Domain.Strategies;
 using RobotAndMaze.Infrastructure;
 
-namespace RobotAndMaze
+namespace RobotAndMaze;
+
+internal static class Program
 {
-    internal static class Program
+    private static readonly IRobotMoveFactory[] RobotMoveFactories =
     {
-        private static readonly IRobotMoveFactory[] RobotMoveFactories =
-        {
-            new RoverMoveFactory(new BasicRover("Jessie")),
-            new RoverMoveFactory(new AdvancedRover("Walter")),
-            new HelicopterMoveFactory(new BasicHelicopter("Skyler"))
-        };
+        new RoverMoveFactory(new BasicRover("Jessie")),
+        new RoverMoveFactory(new AdvancedRover("Walter")),
+        new HelicopterMoveFactory(new BasicHelicopter("Skyler"))
+    };
 
-        private static void Main()
-        {
-            var gameManager = new GameManager(
-                new MatrixProvider(),
-                new GameDisplay(),
-                new MoveService(
-                    new MoveStrategy(RobotMoveFactories)));
+    private static void Main()
+    {
+        var gameManager = new GameManager(
+            new MatrixProvider(),
+            new GameDisplay(),
+            new MoveService(
+                new MoveStrategy(RobotMoveFactories)));
 
-            gameManager.Run(RobotType.BasicRover);
-        }
+        gameManager.Run(RobotType.BasicRover);
     }
 }

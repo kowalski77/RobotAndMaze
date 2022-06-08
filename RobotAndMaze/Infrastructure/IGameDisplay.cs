@@ -1,20 +1,19 @@
 ﻿using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Support;
 
-namespace RobotAndMaze.Infrastructure
+namespace RobotAndMaze.Infrastructure;
+
+public interface IGameDisplay
 {
-    public interface IGameDisplay
-    {
-        void PrintMatrix(Matrix matrix);
+    void PrintMatrix(Matrix matrix);
 
-        void PrintResult(Result result);
+    void PrintResult(Result result);
 
-        void PrintStart();
+    void PrintStart();
 
-        void PrintEnd();
+    void PrintEnd();
 
-        void PrintOptions();
+    void PrintOptions();
 
-        void PrintUnknownOption();
-    }
+    void PrintUnknownOption();
 }

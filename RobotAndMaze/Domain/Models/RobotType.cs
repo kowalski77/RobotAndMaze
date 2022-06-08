@@ -1,9 +1,8 @@
-﻿namespace RobotAndMaze.Domain.Models
+﻿namespace RobotAndMaze.Domain.Models;
+
+public enum RobotType
 {
-    public enum RobotType
-    {
-        BasicRover,
-        AdvancedRover,
-        BasicHelicopter
-    }
+    BasicRover,
+    AdvancedRover,
+    BasicHelicopter
 }

@@ -1,13 +1,12 @@
-﻿namespace RobotAndMaze.Domain.Models.Abstractions
+﻿namespace RobotAndMaze.Domain.Models.Abstractions;
+
+public interface IMove
 {
-    public interface IMove
-    {
-        int Forward { get; }
+    int Forward { get; }
 
-        int Back { get; }
+    int Back { get; }
 
-        int Left { get; }
+    int Left { get; }
 
-        int Right { get; }
-    }
+    int Right { get; }
 }

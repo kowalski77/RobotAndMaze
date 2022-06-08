@@ -3,26 +3,25 @@ using System.Linq;
 using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Support;
 
-namespace RobotAndMaze.Domain.Strategies
+namespace RobotAndMaze.Domain.Strategies;
+
+public class MoveStrategy : IMoveStrategy
 {
-    public class MoveStrategy : IMoveStrategy
+    private readonly IRobotMoveFactory[] robotMoveFactory;
+
+    public MoveStrategy(IRobotMoveFactory[] robotMoveFactory)
     {
-        private readonly IRobotMoveFactory[] robotMoveFactory;
+        this.robotMoveFactory = robotMoveFactory ?? throw new ArgumentNullException(nameof(robotMoveFactory));
+    }
 
-        public MoveStrategy(IRobotMoveFactory[] robotMoveFactory)
+    public Result<Coordinates> CanMove(Matrix matrix, Direction direction, RobotType robotType)
+    {
+        var moveFactory = this.robotMoveFactory.FirstOrDefault(x => x.RobotType == robotType);
+        if (moveFactory == null)
         {
-            this.robotMoveFactory = robotMoveFactory ?? throw new ArgumentNullException(nameof(robotMoveFactory));
+            throw new InvalidOperationException($"Could not found any move strategy for robot of type: {nameof(robotType)}");
         }
 
-        public Result<Coordinates> CanMove(Matrix matrix, Direction direction, RobotType robotType)
-        {
-            var moveFactory = this.robotMoveFactory.FirstOrDefault(x => x.RobotType == robotType);
-            if (moveFactory == null)
-            {
-                throw new InvalidOperationException($"Could not found any move strategy for robot of type: {nameof(robotType)}");
-            }
-
-            return moveFactory.CheckCoordinates(matrix, direction);
-        }
+        return moveFactory.CheckCoordinates(matrix, direction);
     }
 }

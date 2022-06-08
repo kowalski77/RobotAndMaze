@@ -1,6 +1,5 @@
-﻿namespace RobotAndMaze.Domain.Models.Abstractions
+﻿namespace RobotAndMaze.Domain.Models.Abstractions;
+
+public interface IRover : IRobot, IMove
 {
-    public interface IRover : IRobot, IMove
-    {
-    }
 }

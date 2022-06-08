@@ -1,14 +1,13 @@
-﻿namespace RobotAndMaze.Domain.Models
+﻿namespace RobotAndMaze.Domain.Models;
+
+public enum Direction
 {
-    public enum Direction
-    {
-        Forward,
-        Back,
-        Left,
-        Right,
-        UpRight,
-        UpLeft,
-        DownRight,
-        DownLeft
-    }
+    Forward,
+    Back,
+    Left,
+    Right,
+    UpRight,
+    UpLeft,
+    DownRight,
+    DownLeft
 }
