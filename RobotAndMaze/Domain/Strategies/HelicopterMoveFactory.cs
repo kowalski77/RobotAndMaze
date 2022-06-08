@@ -1,5 +1,4 @@
-﻿using System;
-using RobotAndMaze.Domain.Models;
+﻿using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Domain.Models.Abstractions;
 using RobotAndMaze.Support;
 
@@ -11,7 +10,7 @@ public class HelicopterMoveFactory : BaseMoveFactory
     {
     }
 
-    private IHelicopter Helicopter => (IHelicopter) this.Robot;
+    private IHelicopter Helicopter => (IHelicopter)this.Robot;
 
     public override Result<Coordinates> CheckCoordinates(Matrix matrix, Direction direction)
     {

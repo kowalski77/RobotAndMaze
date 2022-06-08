@@ -7,7 +7,7 @@ public class MatrixProvider : IMatrixProvider
 {
     public Matrix GetBasic()
     {
-        return new(MatrixSeed.Create6X6Cells(), new Coordinates
+        return new Matrix(MatrixSeed.Create6X6Cells(), new Coordinates
         {
             XPos = 0, YPos = 0
         });

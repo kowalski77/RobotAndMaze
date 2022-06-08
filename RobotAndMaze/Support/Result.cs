@@ -16,11 +16,11 @@ public class Result
 
     public static Result<T> Ok<T>(T value)
     {
-        return new(value, true, string.Empty);
+        return new Result<T>(value, true, string.Empty);
     }
 
     public static Result<T> Fail<T>(string error)
     {
-        return new(default!, false, error);
+        return new Result<T>(default!, false, error);
     }
 }

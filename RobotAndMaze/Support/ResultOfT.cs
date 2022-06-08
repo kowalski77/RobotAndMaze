@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RobotAndMaze.Support;
+﻿namespace RobotAndMaze.Support;
 
 public sealed class Result<T> : Result
 {

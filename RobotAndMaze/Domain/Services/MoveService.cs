@@ -1,5 +1,4 @@
-﻿using System;
-using RobotAndMaze.Domain.Models;
+﻿using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Domain.Strategies;
 using RobotAndMaze.Support;
 

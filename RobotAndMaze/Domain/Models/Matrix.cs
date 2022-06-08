@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Domain.Models;
@@ -18,12 +17,12 @@ public class Matrix
 
     public int ColumnLength => this.cells.GetLength(1);
 
+    public Coordinates CurrentCoordinates { get; }
+
     public Cell GetCell(int xPos, int yPos)
     {
         return this.cells[xPos, yPos];
     }
-
-    public Coordinates CurrentCoordinates { get; }
 
     public Result<Coordinates> CheckCoordinates(int xPos, int yPos)
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RobotAndMaze.Domain.Models;
+﻿namespace RobotAndMaze.Domain.Models;
 
 public readonly struct Coordinates : IEquatable<Coordinates>
 {

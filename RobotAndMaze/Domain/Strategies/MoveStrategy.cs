@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using RobotAndMaze.Domain.Models;
+﻿using RobotAndMaze.Domain.Models;
 using RobotAndMaze.Support;
 
 namespace RobotAndMaze.Domain.Strategies;
